@@ -1,0 +1,1 @@
+from jogo_da_forca import jogar
