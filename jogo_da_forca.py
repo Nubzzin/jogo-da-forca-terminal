@@ -7,6 +7,24 @@ def jogar():
     print('*******Jogo da forca*********')
     print('*****************************')
 
+    # Escolhendo dificuldade
+    def escolha_dificuldade():
+        dificuldade = input('Olá escolha uma dificuldade:\n0-Facil(15 chances) / 1-Medio(10 chances) / 2-Dificil(5 chances)\n:')
+        chances = 0
+        if dificuldade == '0':
+            chances = 15
+        elif dificuldade == '1':
+            chances = 10
+        elif dificuldade == '2':
+            chances = 5
+        else:
+            print('Error, numero invalido')
+            escolha_dificuldade()
+
+        return chances
+    
+    chances = escolha_dificuldade()
+
     # Coleta palavras e as normaliza
     def gerar_palavras_secretas():
         palavras = read_csv('palavras_adivinha.csv')
@@ -22,10 +40,9 @@ def jogar():
         return palavras_sorteada.lower()
 
     # Verifica se o chute esta certo
-    def verificar_chute(palavra_sorteada):
+    def verificar_chute(palavra_sorteada,chances):
         posicoes = ['_' for i in range(len(palavra_sorteada))]
         print(posicoes, len(posicoes))
-        chances = 5
         
         # Enquanto chances maior que 0
         while(chances>0):
@@ -54,8 +71,8 @@ def jogar():
             # Se as chances acabarem
             elif chances == 0:
                 print(f'Mongão, chances acabaram\n A palavra era: {palavra_sorteada.title()}')
-
-    verificar_chute(sorteiar_palavra(gerar_palavras_secretas()))
+            
+    verificar_chute(sorteiar_palavra(gerar_palavras_secretas()),chances)
 
 if __name__ == '__main__':
     jogar()
