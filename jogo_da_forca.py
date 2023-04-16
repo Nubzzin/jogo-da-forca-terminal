@@ -9,7 +9,8 @@ def jogar():
 
     # Ler arquivo
     palavras = read_csv('palavras_adivinha.csv')
-    coluna = randrange(4)
+    palavras.dropna(inplace=True)
+    coluna = randrange(len(palavras.columns))
 
     # Escolhendo dificuldade
     def escolha_dificuldade():
